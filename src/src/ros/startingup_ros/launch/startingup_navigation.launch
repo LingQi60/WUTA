@@ -1,0 +1,12 @@
+<launch>
+    <rosparam file="$(find startingup_ros)/data/param/init_param.yaml" command="load" />
+
+    <include file="$(find startingup_ros)/launch/custom_launch/my_map.launch"/>
+    <include file="$(find startingup_ros)/launch/custom_launch/my_sensing.launch"/>
+    <include file="$(find startingup_ros)/launch/custom_launch/my_localization.launch"/>
+    <include file="$(find startingup_ros)/launch/custom_launch/my_detection.launch"/>
+    <include file="$(find startingup_ros)/launch/custom_launch/my_mission_planning.launch"/>
+    <include file="$(find startingup_ros)/launch/custom_launch/my_motion_planning.launch"/>
+
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find startingup_ros)/rviz/default.rviz"/>
+</launch>

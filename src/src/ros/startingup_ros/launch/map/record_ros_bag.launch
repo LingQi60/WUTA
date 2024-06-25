@@ -1,0 +1,19 @@
+<launch>
+
+  <node pkg="rosbag" type="record" name="rosbag_record" args=
+    "
+    -b 0 
+    -O $(find startingup_ros)/data/bag/build_pcd_data
+    /imu_raw
+    /nmea_sentence
+    /points_raw
+    /camera_info
+    /usb_cam/image_raw
+    /image_raw
+    "
+  />
+  <include file="$(find startingup_ros)/launch/custom_launch/my_sensing.launch"/>
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find startingup_ros)/rviz/record_bag.rviz"/>
+
+</launch>

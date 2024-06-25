@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="union_detect" type="union_detect_node" name="union_detect_node" output="screen"/>
+</launch>

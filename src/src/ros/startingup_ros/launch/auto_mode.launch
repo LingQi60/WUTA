@@ -1,0 +1,3 @@
+<launch>
+  <node pkg="vehicle_socket" type="vehicle_sender" name="vehicle_sender" output="screen"/>
+</launch>

@@ -1,0 +1,16 @@
+<launch>
+  <node pkg="rostopic" type="rostopic" name="config_lane_rule"
+		    args="pub -l /config/lane_rule autoware_config_msgs/ConfigLaneRule 
+          '{header: auto,
+            acceleration: 1.0,
+            stopline_search_radius: 1.0,
+            number_of_zeros_ahead: 0,
+            number_of_zeros_behind: 0,
+            number_of_smoothing_count: 0}' "
+  />
+
+  <include file="$(find lane_planner)/launch/lane_rule_option.launch">
+      <arg name="use_ll2" value="False"/>
+  </include>
+
+</launch>

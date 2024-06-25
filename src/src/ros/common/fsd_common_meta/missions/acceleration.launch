@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- for perception -->
+  <!--include file="$(find line_detector)/launch/line_detector.launch"/ -->
+	<!--include file="$(find lidar_cluster)/launch/lidar_cluster.launch"/ -->
+  <!-- for planning -->
+  <!--include file="$(find path_generator)/launch/acceleration.launch"/ -->
+  <!-- for control-->
+  <!--include file="$(find control)/launch/acceleration.launch"/ -->
+  <!-- for perception -->
+  <include file="$(find rslidar_sdk)/launch/start.launch"/>
+  <include file="$(find nmea_navsat_driver)/launch/nmea_serial_driver.launch"/>
+  <include file="$(find fsd_inferface_mine)/launch/fsd_interface.launch"/>
+  <include file="$(find lidar_obstacle_detection)/launch/obstacle_detection.launch"/>
+  <include file="$(find line_detector)/launch/line_detector.lanuch"/>
+  <!-- for planning -->
+  <include file="$(find path_generator)/launch/acceleration.launch"/>
+  <!-- for control-->
+  <include file="$(find control)/launch/acceleration.launch"/>
+
+</launch>

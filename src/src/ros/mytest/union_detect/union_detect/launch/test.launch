@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="union_detect" type="talker" name="talker" output="screen"/>
+    <node pkg="union_detect" type="test_node" name="test_node" output="screen"/>
+    <node pkg="union_detect" type="listener" name="listener" output="screen"/>
+</launch>

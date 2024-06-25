@@ -1,0 +1,10 @@
+<launch>
+  <include file="$(find waypoint_maker)/launch/waypoint_saver.launch">
+    <arg name="save_finename" value="$(find startingup_ros)/data/map/way_points/driving_lane.csv"/>
+    <arg name="input_type" value="0"/>
+    <arg name="save_velocity" value="True"/>
+    <arg name="interval" value="1"/>
+    <arg name="lane_topic" value="/lane_waypoints_array"/>
+  </include>
+
+</launch>

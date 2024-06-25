@@ -1,0 +1,18 @@
+<launch>
+
+    <node pkg="rostopic" type="rostopic" name="config_lane_select"
+            args="pub -l /config/lane_select autoware_config_msgs/ConfigLaneSelect 
+            '{header: auto,
+            distance_threshold_neighbor_lanes: 5.0,
+            lane_change_interval: 10.0,
+            lane_change_target_ratio: 5.0,
+            lane_change_target_minimum: 10.0,
+            vector_length_hermite_curve: 10.0}' "
+    />
+
+    <include file="$(find lane_planner)/launch/lane_select.launch">
+        <arg name="search_closest_waypoint_minimum_dt" value="5"/>
+    </include>
+
+
+</launch>

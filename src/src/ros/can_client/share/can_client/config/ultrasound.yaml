@@ -1,0 +1,15 @@
+# key=index0 表示安装的位置,从左上开始, 
+# value=2表示属于左前方的位置
+# value=-1表示没有该位置或屏蔽
+index0: 0
+index1: 1
+index2: 2
+index3: 3
+index4: 4
+index5: 5
+index6: 6
+index7: 7
+index8: -1
+index9: -1
+index10: -1
+index11: -1

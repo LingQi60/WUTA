@@ -1,0 +1,19 @@
+<launch>
+
+  <!-- Navi configurations -->
+  <arg name="can_box_raw" default="/can_box_raw" />
+  <arg name="can_box_cmd" default="/can_box_cmd" />
+  <arg name="update_rate" default="30" />
+  <arg name="can_port" default="8001" />
+  <arg name="node_name" default="can_connect" />
+
+  <node pkg="can_connect" type="can_connect" name="$(arg node_name)" output="screen">
+    <remap from="can_box_raw" to="$(arg can_box_raw)" />
+    <remap from="can_box_cmd" to="$(arg can_box_cmd)" />
+
+    <param name="update_rate" value="$(arg update_rate)" />
+    <param name="can_port" value="$(arg can_port)" />
+
+  </node>
+
+</launch>

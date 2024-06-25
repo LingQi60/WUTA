@@ -1,0 +1,16 @@
+ <launch>
+
+
+
+  <include file="$(find vehicle_description)/launch/vehicle_model.launch" />
+
+  <!-- points downsampler -->
+  <include file="$(find points_downsampler)/launch/points_downsample.launch" />
+  
+ <!-- nmea2tfpose -->
+  <include file="$(find gnss_localizer)/launch/nmea2tfpose.launch">
+    <param name="plane" value="1"/>
+  </include>
+
+  <include file="$(find startingup_ros)/launch/encap_launch/ndt_matching.launch"/>
+</launch>

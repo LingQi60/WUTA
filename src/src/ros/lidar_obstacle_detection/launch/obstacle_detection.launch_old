@@ -1,0 +1,18 @@
+<launch>
+<node pkg="lidar_obstacle_detection" name="lidar_obstacle_detect" type="environment"  output="screen">
+    <remap from="cloud_input" to="lslidar_point_cloud" />
+
+    <!--车体长度-->
+    <param name="car_length" type="double" value="1.9" />
+    <!--车体宽度-->
+    <param name="car_width" type="double" value="1.0" />
+
+    <!--前方障碍物停止距离-->
+    <param name="front_stop_distance" type="double" value="1.0" />
+    <!--侧方障碍物停止距离-->
+    <param name="edge_stop_distance" type="double" value="0.25" />
+    <!--后方障碍物停止距离-->
+    <param name="back_stop_distance" type="double" value="0.10" />
+
+</node>
+</launch>

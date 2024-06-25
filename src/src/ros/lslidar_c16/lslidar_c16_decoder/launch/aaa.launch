@@ -1,0 +1,75 @@
+
+<launch>
+	
+  <arg name="device_ip1" default="192.168.86.200" />
+  <arg name="device_ip2" default="192.168.86.202" />
+
+  <arg name="msop_port1" default="2368" />
+  <arg name="difop_port1" default="2369" />
+  <arg name="msop_port2" default="2370" />
+  <arg name="difop_port2" default="2371" />
+  <arg name="return_mode" default="1" />
+  <arg name="time_synchronization" default="false" />
+	
+
+
+  <node pkg="lslidar_c16_driver" type="lslidar_c16_driver_node" name="lslidar_c16_driver_node" output="screen" ns="FrontRightLidar" >
+    <param name="lidar_ip" value="$(arg device_ip1)" />
+    <param name="msop_port" value="$(arg msop_port1)" />
+    <param name="difop_port" value="$(arg difop_port1)"/>
+    <param name="frame_id" value="front_right"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="rpm" value="600"/>
+    <param name="return_mode" value="$(arg return_mode)"/>
+    <param name="time_synchronization" value="$(arg time_synchronization)"/>
+  </node>
+
+  <node pkg="lslidar_c16_decoder" type="lslidar_c16_decoder_node" name="lslidar_c16_decoder_node" output="screen" ns="FrontRightLidar">
+    <param name="calibration_file" value="$(find lslidar_c16_decoder)/params/lslidar_c16_db.yaml" />
+    <param name="min_range" value="0.15"/>
+    <param name="max_range" value="150.0"/>
+    <param name="cbMethod" value="true"/>
+    <param name="config_vert" value="true"/>
+    <param name="print_vert" value="false"/>
+    <param name="return_mode" value="$(arg return_mode)"/>
+    <param name="degree_mode" value="2"/>
+    <param name="config_vert_file" value="false"/>
+    <param name="distance_unit" value="0.25"/>
+    <param name="time_synchronization" value="$(arg time_synchronization)"/>
+    <param name="scan_start_angle" value="0.0"/>
+    <param name="scan_end_angle" value="36000.0"/>
+  </node>
+
+
+  <node pkg="lslidar_c16_driver" type="lslidar_c16_driver_node" name="lslidar_c16_driver_node" output="screen" ns="BackLeftLidar" >
+    <param name="lidar_ip" value="$(arg device_ip2)" />
+    <param name="msop_port" value="$(arg msop_port2)" />
+    <param name="difop_port" value="$(arg difop_port2)"/>
+    <param name="frame_id" value="back_left"/>
+    <param name="add_multicast" value="false"/>
+    <param name="group_ip" value="224.1.1.2"/>
+    <param name="rpm" value="600"/>
+    <param name="return_mode" value="$(arg return_mode)"/>
+    <param name="time_synchronization" value="$(arg time_synchronization)"/>
+  </node>
+
+  <node pkg="lslidar_c16_decoder" type="lslidar_c16_decoder_node" name="lslidar_c16_decoder_node" output="screen" ns="BackLeftLidar">
+    <param name="calibration_file" value="$(find lslidar_c16_decoder)/params/lslidar_c16_db.yaml" />
+    <param name="min_range" value="0.15"/>
+    <param name="max_range" value="150.0"/>
+    <param name="cbMethod" value="true"/>
+    <param name="config_vert" value="true"/>
+    <param name="print_vert" value="false"/>
+    <param name="return_mode" value="$(arg return_mode)"/>
+    <param name="degree_mode" value="2"/>
+    <param name="config_vert_file" value="false"/>
+    <param name="distance_unit" value="0.25"/>
+    <param name="time_synchronization" value="$(arg time_synchronization)"/>
+    <param name="scan_start_angle" value="0.0"/>
+    <param name="scan_end_angle" value="36000.0"/>
+  </node>
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="front_right_to_back_left" args="-2.69974 -1.00959 0.00480865 0.111676 -3.13576  3.13902 /front_right /back_left" />
+ 
+</launch>

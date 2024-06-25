@@ -1,0 +1,8 @@
+<launch>
+    <arg name="ultra_type" default="183" doc="183: 最小290mm(建议大于2.5m), 177: 最小290mm(建议大于1.5m),179: 最小250mm(建议小于1.5m),181: 最小200mm(建议小于1.0m),183: 最小200mm(建议小于0.5m),185: 最小130mm(建议小于0.2m)" /> <!--km/h-->
+    <arg name="load" default="$(find startingup_ros)/data/Common/config/ultrasound.yaml"/> 
+    <node pkg="can_client" name="ultra_bf19" type="ultra_bf19">
+        <rosparam command="load" file="$(arg load)" />
+        <param name="ultra_type" value="$(arg ultra_type)" />
+    </node>
+</launch>

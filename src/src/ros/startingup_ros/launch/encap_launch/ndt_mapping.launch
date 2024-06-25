@@ -1,0 +1,25 @@
+<launch>
+  <!-- ndt_mapping -->
+  <node pkg="rostopic" type="rostopic" name="config_ndt_mapping"
+		    args="pub -l /config/ndt_mapping autoware_config_msgs/ConfigNDTMapping 
+          '{header: auto,
+          resolution: 1.0,
+          step_size: 0.10000000149,
+          trans_epsilon: 0.00999999977648,
+          max_iterations: 30,
+          leaf_size: 1.0,
+          min_scan_range: 5.0,
+          max_scan_range: 200.0,
+          min_add_scan_shift: 1.0}' "
+  />
+
+  <include file="$(find lidar_localizer)/launch/ndt_mapping.launch">
+      <arg name="method_type" value="0" />
+      <arg name="incremental_voxel_update" value="False"/>
+      <arg name="use_odom" value="False"/>
+      <arg name="use_imu" value="False"/>
+      <arg name="imu_upside_down" value="False"/>
+      <arg name="imu_topic" value="/imu_raw"/>
+  </include>
+  
+</launch>

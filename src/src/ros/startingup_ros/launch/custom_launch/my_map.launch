@@ -1,0 +1,29 @@
+<launch>
+
+  <!-- TF /work /map -->
+  <include file="$(find startingup_ros)/data/tf/tf.launch"/>
+
+  <!-- Point Cloud -->
+  <include file="$(find map_file)/launch/points_map_loader.launch">
+    <arg name="path_pcd" value="$(find startingup_ros)/data/map/pointcloud_map/mth-0.2.pcd" />
+  </include>
+  <!-- <node pkg="map_file" type="points_map_loader" name="points_map_loader" args="$(find startingup_ros)/data/map/pointcloud_map/*.pcd"/> -->
+
+  <!-- Vector Map -->
+  <!-- <node pkg="map_file" type="vector_map_loader" name="vector_map_loader" 
+    args="/home/antranger/work/autoware.ai/catkin-ws/src/startingup_ros/data/map/vector_map/*.csv">
+  </node> -->
+  <node pkg="map_file" type="vector_map_loader" name="vector_map_loader" args="
+    $(find startingup_ros)/data/map/vector_map/area.csv       
+    $(find startingup_ros)/data/map/vector_map/dtlane.csv  
+    $(find startingup_ros)/data/map/vector_map/line.csv  
+    $(find startingup_ros)/data/map/vector_map/point.csv     
+    $(find startingup_ros)/data/map/vector_map/road_surface_mark.csv
+    $(find startingup_ros)/data/map/vector_map/crosswalk.csv  
+    $(find startingup_ros)/data/map/vector_map/lane.csv    
+    $(find startingup_ros)/data/map/vector_map/node.csv  
+    $(find startingup_ros)/data/map/vector_map/roadedge.csv  
+    $(find startingup_ros)/data/map/vector_map/whiteline.csv"
+  />
+
+</launch>

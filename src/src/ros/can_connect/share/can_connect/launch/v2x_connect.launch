@@ -1,0 +1,20 @@
+<launch>
+
+  <!-- Navi configurations -->
+  <arg name="can_box_raw" default="/can_box_raw" />
+  <arg name="can_box_cmd" default="/can_box_cmd" />
+  <arg name="update_rate" default="30" />
+  <arg name="v2x_port" default="127.0.0.1" />
+  <arg name="v2x_ip" default="8002" />
+
+  <node pkg="can_connect" type="can_connect" name="v2x_connect" >
+    <remap from="can_box_raw" to="$(arg can_box_raw)" />
+    <remap from="can_box_cmd" to="$(arg can_box_cmd)" />
+
+    <param name="update_rate" value="$(arg update_rate)" />
+    <param name="v2x_port" value="$(arg v2x_port)" />
+    <param name="v2x_ip" value="$(arg v2x_ip)" />
+
+  </node>
+
+</launch>

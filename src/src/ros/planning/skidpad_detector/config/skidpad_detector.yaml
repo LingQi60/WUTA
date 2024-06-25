@@ -1,0 +1,17 @@
+cluster_filtered_topic_name: /perception/lidar_cluster
+
+transform_matrix_topic_name: /transform_matrix
+
+
+
+path: # Remember to replace {YOUR_WORKSPACE} with your real workspace, like "home/lyw/opensource_ws/ros/planning/skidpad_detector/config/skidpad.pcd"
+  skidpad_map: {YOUR_WORKSPACE}/ros/planning/skidpad_detector/config/skidpad.pcd
+  path_x: {YOUR_WORKSPACE}/ros/planning/skidpad_detector/config/path_x.txt
+  path_y: {YOUR_WORKSPACE}/ros/planning/skidpad_detector/config/path_y.txt
+
+length:
+  start: 15.0
+  lidar2imu: 1.87
+  threshold: 0.7
+
+node_rate: 50   # [Herz]

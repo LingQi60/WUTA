@@ -1,0 +1,22 @@
+<launch>
+  <rosparam file="$(find startingup_ros)/data/param/init_param.yaml" command="load" />
+  <include file="$(find startingup_ros)/data/tf/tf.launch"/>
+
+  <!-- Point Cloud -->
+  <include file="$(find map_file)/launch/points_map_loader.launch">
+    <arg name="path_pcd" value="$(find startingup_ros)/data/map/pointcloud_map/mth-0.2.pcd" />
+  </include>
+  <include file="$(find startingup_ros)/launch/custom_launch/my_sensing.launch"/>
+  <include file="$(find startingup_ros)/launch/custom_launch/my_localization.launch"/>
+
+
+  <include file="$(find autoware_connector)/launch/vel_pose_connect.launch">
+      <arg name="topic_pose_stamped" value="/ndt_pose"/>
+      <arg name="topic_twist_stamped" value="/estimate_twist"/>
+      <arg name="sim_mode" value="False"/>
+  </include>
+
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find startingup_ros)/rviz/save_points.rviz"/>
+
+</launch>

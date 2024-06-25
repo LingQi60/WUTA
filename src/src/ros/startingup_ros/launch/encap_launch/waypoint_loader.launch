@@ -1,0 +1,46 @@
+<launch>
+    <node pkg="rostopic" type="rostopic" name="config_waypoint_replanner"
+        args="pub -l /config/waypoint_replanner autoware_config_msgs/ConfigWaypointReplanner 
+        '{ multi_lane_csv: $(find startingup_ros)/data/map/way_points/driving_lane.csv
+            ,replanning_mode: False
+            ,use_decision_maker: False
+            ,velocity_max: 20.0
+            ,velocity_min: 4.0
+            ,accel_limit: 0.5
+            ,decel_limit: 0.300000011921
+            ,radius_thresh: 20.0
+            ,radius_min: 6.0
+            ,resample_mode: True
+            ,resample_interval: 1.0
+            ,velocity_offset: 4
+            ,end_point_offset: 1
+            ,braking_distance: 5
+            ,replan_curve_mode: False
+            ,replan_endpoint_mode: True
+            ,overwrite_vmax_mode: False
+            ,realtime_tuning_mode: False}' "
+    />
+
+    <include file="$(find waypoint_maker)/launch/waypoint_loader.launch">
+        <arg name="load_csv" value="True"/>
+        <arg name="multi_lane_csv" value="$(find startingup_ros)/data/map/way_points/driving_lane.csv"/>
+        <arg name="replanning_mode" value="False"/>
+        <arg name="realtime_tuning_mode" value="False"/>
+        <arg name="resample_mode" value="True"/>
+        <arg name="resample_interval" value="1"/>
+        <arg name="replan_curve_mode" value="False"/>
+        <arg name="overwrite_vmax_mode" value="False"/>
+        <arg name="replan_endpoint_mode" value="True"/>
+        <arg name="velocity_max" value="20"/>
+        <arg name="radius_thresh" value="20"/>
+        <arg name="radius_min" value="6"/>
+        <arg name="velocity_min" value="4"/>
+        <arg name="accel_limit" value="0.5"/>
+        <arg name="decel_limit" value="0.3"/>
+        <arg name="velocity_offset" value="4"/>
+        <arg name="braking_distance" value="5"/>
+        <arg name="end_point_offset" value="1"/>
+        <arg name="use_decision_maker" value="False"/>
+    </include>
+
+</launch>

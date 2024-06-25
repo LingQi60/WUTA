@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="fsd_interface" type="fsd_interface_node" name="fsd_interface_node" output="screen"/>
+</launch>

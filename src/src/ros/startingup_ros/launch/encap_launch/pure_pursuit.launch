@@ -1,0 +1,21 @@
+<launch>  
+    <!-- pure_pursuit , 发布话题数据,话题名为 /config/waypoint_follower-->
+    <node pkg="rostopic" type="rostopic" name="config_waypoint_follower_rostopic"
+        args="pub -l /config/waypoint_follower autoware_config_msgs/ConfigWaypointFollower
+        '{header: auto,
+            param_flag: 0,
+            velocity: 20.0,
+            lookahead_distance: 6.0,
+            lookahead_ratio: 1.5,
+            minimum_lookahead_distance: 6.0,
+            displacement_threshold: 0.0,
+            relative_angle_threshold: 0.0,
+        }' "
+    />
+    <include file="$(find pure_pursuit)/launch/pure_pursuit.launch">
+        <arg name="is_linear_interpolation" value="True"/>
+        <arg name="publishes_for_steering_robot" value="True"/>
+        <arg name="add_virtual_end_waypoints" value="False"/>
+    </include>
+    
+</launch>

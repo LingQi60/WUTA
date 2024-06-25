@@ -1,0 +1,29 @@
+<launch>
+    <arg name="frame_id" default="velodyne" />
+    <arg name="lidar_type" default="C16" />
+
+    <node pkg="lidar_obstacle_detection" name="lidar_obstacle_detect" type="environment"  output="screen">
+        <remap from="cloud_input" to="points_raw" />
+        <remap from="lslidar_point_cloud" to="output_fusion_points" />
+
+        <param name="frame_id" type="string" value="$(arg frame_id)" />
+
+        <!--车体长度-->
+        <param name="car_length" type="double" value="3.0" />
+        <!--车体宽度-->
+        <param name="car_width" type="double" value="1.49" />
+        <!--车体高度(激光雷达的高度)-->
+        <param name="car_hight" type="double" value="2" />
+
+        <!--前方障碍物停止距离-->
+        <param name="front_stop_distance" type="double" value="2" />
+        <!--侧方障碍物停止距离-->
+        <param name="edge_stop_distance" type="double" value="1" />
+        <!--后方障碍物停止距离-->
+        <param name="back_stop_distance" type="double" value="0.0" />
+
+        <param name="lidar_type" type="string" value="$(arg lidar_type)" />
+    </node>
+    <!--多雷达融合-->
+    <!--node pkg="lidar_obstacle_detection" name="lidar_fusion" type="lidar_fusion"  output="screen" / -->
+</launch>

@@ -1,0 +1,8 @@
+prefix=/home/ant/work/autoware.ai/install/can_client
+
+Name: can_client
+Description: Description of can_client
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

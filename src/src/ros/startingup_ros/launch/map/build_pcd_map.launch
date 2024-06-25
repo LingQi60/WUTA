@@ -1,0 +1,29 @@
+<launch>
+  <rosparam file="$(find startingup_ros)/data/param/init_param.yaml" command="load" />
+  <param name="use_sim_time" value="true"/>
+
+  <!-- TF /work /map -->
+  <include file="$(find startingup_ros)/data/tf/tf.launch"/>
+  <include file="$(find vehicle_description)/launch/vehicle_model.launch" />
+
+<!-- 
+      /home/antranger/work/autoware_data/autoware-gnss-local.bag -->
+  <node pkg="rosbag" type="play" name="rosbag_play" args="
+      $(find startingup_ros)/data/bag/build_pcd_data.bag
+      "
+  />
+
+  <!--save gnss init pose-->
+  <include file="$(find gnss_origin_pose)/launch/topic_example.launch"/>
+  
+  <!-- nmea2tfpose -->
+  <include file="$(find gnss_localizer)/launch/nmea2tfpose.launch">
+    <param name="plane" value="1"/>
+  </include>
+
+  <include file="$(find startingup_ros)/launch/encap_launch/ndt_mapping.launch"/>
+  
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find startingup_ros)/rviz/build_map.rviz"/>
+
+
+</launch>

@@ -1,0 +1,27 @@
+<launch>
+
+    <arg name="vehicle_name" default="$(env AUTOCAR_VEHICLE_TYPE)"/>
+    <arg name="base_brake_value" default="10"/>
+
+    <arg name="add_speed_value" default="5" /><!--仿真线控底盘建议使用 add_speed_value：15-->
+    <arg name="rotate_speed" default="800" /><!--目标转速   仿真线控底盘使用-->
+    <arg name="enable_recover" default="false" /> <!--倒车功能-->
+
+    <arg name="speed_gain" default="1" /><!--速度增加倍率-->
+    <arg name="stop_brake_increase" default="10" /><!--急刹值-->
+    <arg name="normal_brake_increase" default="2.0" /><!--正常刹车值-->
+
+    <node pkg="can_client" name="vehicle_core" type="vehicle_core" output="screen">
+        <param name="add_speed_value" value="$(arg add_speed_value)"/>
+        <param name="vehicle_name" value="$(arg vehicle_name)"/>
+        <param name="base_brake_value" value="$(arg base_brake_value)"/>
+        <param name="add_speed_gain" value="$(arg add_speed_value)"/>
+        <param name="speed_gain" value="$(arg speed_gain)" />
+        <param name="stop_brake_increase" value="$(arg stop_brake_increase)" />
+        <param name="normal_brake_increase" value="$(arg normal_brake_increase)" />
+        <param name="enable_recover" value="false" />
+        <param name="bench_debug" value="false" /><!--云乐底盘悬空调试时使用-->
+        <!--五菱刹车值建议 stop_brake_increase： 0.8    normal_brake_increase： 0.1-->
+    </node>
+
+</launch>

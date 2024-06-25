@@ -1,0 +1,3 @@
+<launch>
+<include file="$(find startingup_ros)/launch/startingup_navigation.launch"/>
+</launch>

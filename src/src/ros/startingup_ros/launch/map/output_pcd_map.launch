@@ -1,0 +1,9 @@
+
+<launch>
+  <node pkg="rostopic" type="rostopic" name="config_ndt_mapping_output"
+		    args="pub -l /config/ndt_mapping_output autoware_config_msgs/ConfigNDTMappingOutput 
+          '{header: auto,
+            filename: $(find startingup_ros)/data/map/pointcloud_map/lidar_match.pcd,
+            filter_res: 0.20000000298}' "
+  />
+</launch>

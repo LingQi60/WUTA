@@ -1,0 +1,55 @@
+<launch>
+    <arg name="device1_ip" default="192.168.86.200" />
+    <arg name="device2_ip" default="192.168.86.202" />
+
+    <arg name="frame1_id" default="laser1_link" />
+    <arg name="frame2_id" default="laser2_link" />
+    <arg name="frame3_id" default="rslidar" />
+
+    <arg name="msop1_port" default="2368" />
+    <arg name="difop1_port" default="2369" />
+    <arg name="msop2_port" default="2370" />
+    <arg name="difop2_port" default="2371" />
+
+
+    <arg name="lidar1_type" default="C16" />
+    <arg name="lidar2_type" default="C16" />
+    <arg name="lidar3_type" default="RSHELIOS" />
+
+  <group ns="lidar16_1">
+      <include file="$(find lslidar_c16_decoder)/launch/lslidar_c16.launch">
+        <arg name="device_ip" value="$(arg device1_ip)"/>
+        <arg name="frame_id" value="$(arg frame1_id)"/>
+        <arg name="msop_port" value="$(arg msop1_port)"/>
+        <arg name="difop_port" value="$(arg difop1_port)"/>
+      </include>
+  </group>
+
+
+  <group ns="lidar16_2">
+      <include file="$(find lslidar_c16_decoder)/launch/lslidar_c16.launch">
+        <arg name="device_ip" value="$(arg device2_ip)"/>
+        <arg name="frame_id" value="$(arg frame2_id)"/>
+        <arg name="msop_port" value="$(arg msop2_port)"/>
+        <arg name="difop_port" value="$(arg difop2_port)"/>
+      </include>
+      
+  </group>
+
+  <group ns="lidar32_1">
+      <include file="$(find rslidar_sdk)/launch/start.launch" >
+      </include>
+  </group>
+
+  <include file="$(find lidar_obstacle_detection)/launch/obstacle_detection.launch" >
+    <arg name="frame_id" value="base_link"/>
+    <arg name="lidar_type" default="$(arg lidar1_type)" />
+  </include>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find lidar_obstacle_detection)/rviz/default.rviz" required="true"/>
+
+  <node pkg="tf" type="static_transform_publisher" name="lidar1_link" args="1.105 -0.575 -0.92  -0.785 0 0  base_link laser1_link 100" />
+  <node pkg="tf" type="static_transform_publisher" name="lidar2_link" args="-1.105 0.575 -0.86   -0.785 0 0 base_link laser2_link 100" />
+  <node pkg="tf" type="static_transform_publisher" name="lidar3_link" args="0.6 -0.1 0.2 0 0 0 base_link rslidar 100" />
+  
+</launch>

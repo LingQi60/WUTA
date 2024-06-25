@@ -1,0 +1,28 @@
+<launch>
+  
+    <!-- ndt_matching -->
+  <node pkg="rostopic" type="rostopic" name="config_ndt_matching"
+		    args="pub -l /config/ndt autoware_config_msgs/ConfigNDT
+          '{header: auto,
+            init_pos_gnss: 1,
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            roll: 0.0,
+            pitch: 0.0,
+            yaw: 0.0,
+            use_predict_pose: 0,
+            error_threshold: 1.0,
+            resolution: 1.0,
+            step_size: 0.10000000149,
+            trans_epsilon: 0.00999999977648,
+            max_iterations: 30}' "
+  />
+
+  <!-- ndt_matching /config/ndt -->
+  <include file="$(find lidar_localizer)/launch/ndt_matching.launch">
+    <arg name="get_height" value="True" />
+     <arg name="method_type" value="0" />
+  </include>
+
+</launch>

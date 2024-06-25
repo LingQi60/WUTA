@@ -1,0 +1,25 @@
+<launch>
+    <arg name="enable_recover" default="false" />
+    <arg name="speed_gain" default="1" /><!--速度增加倍率-->
+    <arg name="stop_brake_increase" default="10" /><!--急刹值-->
+    <arg name="normal_brake_increase" default="2.0" /><!--正常刹车值-->
+
+    <!-- can box -->
+    <include file="$(find can_connect)/launch/can_connect.launch" />
+
+    <!-- vehicle -->
+    <include file="$(find can_client)/launch/can_vehicle.launch" >
+        <arg name="speed_gain" value="$(arg speed_gain)" />
+        <arg name="stop_brake_increase" value="$(arg stop_brake_increase)" />
+        <arg name="normal_brake_increase" value="$(arg normal_brake_increase)" />
+        <arg name="enable_recover" value="$(arg enable_recover)" />
+    </include>
+
+
+    <!-- Ultrasound -->
+    <include file="$(find can_client)/launch/can_ultrasound.launch" />
+
+    <!-- Millimeter -->
+    <include file="$(find can_client)/launch/can_millimeter.launch" />
+
+</launch>

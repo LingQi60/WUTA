@@ -1,0 +1,26 @@
+<launch>
+
+    <node pkg="rostopic" type="rostopic" name="config_velocity_set"
+            args="pub -l /config/velocity_set autoware_config_msgs/ConfigVelocitySet
+            '{header: auto,
+                stop_distance_obstacle: 15.0,
+                stop_distance_stopline: 5.0,
+                detection_range: 1.29999995232,
+                threshold_points: 5,
+                detection_height_top: 0.10000000149,
+                detection_height_bottom: -1.5,
+                deceleration_obstacle: 0.699999988079,
+                deceleration_stopline: 0.300000011921,
+                velocity_change_limit: 7.0,
+                deceleration_range: 0.0,
+                temporal_waypoints_size: 100.0
+            }' "
+    />
+
+    <include file="$(find waypoint_planner)/launch/velocity_set_option.launch">
+        <arg name="use_crosswalk_detection" value="False"/>
+        <arg name="enable_multiple_crosswalk_detection" value="False"/>
+        <arg name="points_topic" value="points_no_ground"/>
+        <arg name="use_ll2" value="False"/>
+    </include>
+</launch>

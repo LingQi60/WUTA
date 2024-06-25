@@ -1,0 +1,8 @@
+prefix=/home/ant/work/autoware.ai/install/can_connect
+
+Name: can_connect
+Description: Description of can_connect
+Version: 1.12.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
